@@ -3,7 +3,9 @@ import reactLogo from './assets/react.svg'
 import axios from 'axios';
 import './App.css'
 
+import MockDate from 'mockdate'
 import timemachine from 'timemachine';
+import tk from 'timekeeper';
 import moment from 'moment';
 import { format, endOfDay  } from 'date-fns'
 import dayjs from 'dayjs';
@@ -14,14 +16,19 @@ function App() {
 
   useEffect(() => {
     axios.get('https://api-dev.komodo.digital/v1/tender/info').then((response) => {
-      timemachine.config({
-        dateString: new Date(response.headers.date).toString(),
-        tick: true,
-      })
+      tk.travel(new Date(response.headers.date));
 
-      console.log('moment', moment().isAfter(new Date('2022-08-10')));
+      // MockDate.set(new Date(response.headers.date))
+
+      // timemachine.config({
+      //   dateString: new Date(response.headers.date).toString(),
+      //   tick: true,
+      // })
+
+      console.log('moment', moment().isAfter(new Date('2022-08-05')));
       console.log('dayjs', dayjs())
       console.log(format(endOfDay(new Date()), 'yyyy-MM-dd'))
+      setDate(new Date());
     })
   }, []);
 
