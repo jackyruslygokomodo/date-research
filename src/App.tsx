@@ -6,6 +6,7 @@ import './App.css'
 import timemachine from 'timemachine';
 import moment from 'moment';
 import { format, endOfDay  } from 'date-fns'
+import dayjs from 'dayjs';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,7 +19,8 @@ function App() {
         tick: true,
       })
 
-      console.log(moment().isAfter(new Date('2022-08-10')));
+      console.log('moment', moment().isAfter(new Date('2022-08-10')));
+      console.log('dayjs', dayjs())
       console.log(format(endOfDay(new Date()), 'yyyy-MM-dd'))
     })
   }, []);
